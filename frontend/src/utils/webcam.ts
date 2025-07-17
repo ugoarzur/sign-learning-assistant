@@ -13,3 +13,13 @@ if (navigator.mediaDevices.getUserMedia) {
       console.log('Something went wrong!')
     })
 }
+
+navigator.mediaDevices
+  .getUserMedia({ video: true })
+  .then(function (stream: MediaStream): void {
+    const webcam = document.getElementById('webcamVideo')
+    console.log({ webcam, stream })
+  })
+  .catch(function (err) {
+    console.error('Something went wrong!', err)
+  })

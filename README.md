@@ -24,8 +24,26 @@ cd frontend/
 npm i && npm run dev # Start the dev server, listenning on http://localhost:5173/
 ```
 
+# Minimal MVP Pipeline
+
+```
+[User Webcam Input]
+↓
+[MediaPipe Hands in JS]
+↓
+[Extracted 21 keypoints per hand]
+↓
+[Normalize and flatten to feature vector]
+↓
+[Your custom classifier model in TensorFlow.js]
+↓
+[Predicted gesture → Transcription]
+```
+
 # Resources
 
+- [Alphabet en langue des signes française](https://youtu.be/XQEFR5YmIP4?feature=shared)
+- [Langue des signes fr](http://www.langage-des-signes.com/alphabet-langue-des-signes.html)
 - [Python mac install](https://mac.install.guide/python/install)
 - [Pyenv mac](https://mac.install.guide/python/install-pyenv)
 - [Tensorflowjs](https://www.tensorflow.org/js?hl=fr)

@@ -7,6 +7,16 @@ This project has only an educational purpose and may help me to understand how t
 - [Project page](https://github.com/ugoarzur/sign-learning-assistant)
 - [Project issues](https://github.com/ugoarzur/sign-learning-assistant/issues)
 
+# Python
+
+Create a python virtual env with uv:
+
+```bash
+uv init --python 3.12 # use 3.12 because tensorflow does not support newest versions
+uv venv --python 3.12 # if you already have a venv
+uv sync # install dependencies
+```
+
 # Components
 
 | domain   | techno                     | description                                                                                      |

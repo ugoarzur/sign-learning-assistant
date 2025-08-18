@@ -1,19 +1,75 @@
 # Sign Learning Assistant
 
-## Project Context
+## About the Project
 
-This project is an attempt to create a custom sign language recognition assistant, specifically for French sign language. It is primarily educational, aimed at understanding how to build and manage an AI model.
+This project is an attempt to create a custom sign language recognition assistant. It's specifically tailored for French sign language so other languages might not work as expected.
+It is primarily educational, aimed at understanding how to build and manage an AI model.
+
+## Features
+
+The project will enable :
+
+1. letters recognition through video streaming (webcam).
+2. Words and sentences recognition based on what is interpreted.
+3. Transcription restitution, text streaming to the frontend.
 
 ## Technical part
 
-we use Python and Tensorflow to build a model that can recognize sign language gestures.
+### Hand detection and letters recognition
 
-we use a simple frontend in the "frontend/" folder built with Vite.js and react-ts template to handle camera input and display results of the recognition done by the model.
+Objective: transcription from sign language (LSF) to french words, recorded by webcam.
 
-we use base-ui as a UI library for the frontend to provide a clean and responsive design.
+- capture video with browser api
+- detecting hands with MediaPipe or Tensorflow
+- recognition:
+  - collect or use LSF dataset (alphabet)
+  - train a CNN model or transfert learning (MobileNet)
+  - classify letter gestures
 
-all code and comments should be in English to ensure consistency and accessibility for other developers.
+### Words and Sentences
 
-try to answer questions in a concise and clear manner, providing examples when necessary.
+Objective: words and sentences recognition
 
-when reviewing changes, focus on code quality, adherence to project guidelines, and potential improvements.
+- Buffering letters (with timing, end of word)
+- ortographic correction
+- (optional) NLP for sentences suggestions
+- ponctuation
+
+### Re-Transcription in words in frontend
+
+Objective: Display in realtime the corresponding text to the signs
+
+- text streaming (websockets or polling)
+- interface
+  - video
+  - text zone
+  - history of sentences
+
+## Architecture
+
+| Étape                          | Outil                                         |
+| ------------------------------ | --------------------------------------------- |
+| Détection des mains            | ✅ MediaPipe                                  |
+| Extraction des landmarks       | ✅ MediaPipe                                  |
+| Reconnaissance des lettres     | ✅ TensorFlow (modèle entraîné sur landmarks) |
+| Intégration dans le navigateur | ✅ TensorFlow.js + MediaPipe JS               |
+
+```
+sign-transcriber-frontend/
+├── public/
+│   └── index.html
+├── src/
+│   ├── App.tsx
+│   ├── components/
+│   │   ├── VideoCapture.tsx       # Webcam + frame extraction
+│   │   ├── HandDetection.tsx      # MediaPipe ou TF.js model
+│   │   ├── LetterRecognition.tsx  # Classification des gestes
+│   │   └── TextStream.tsx         # Affichage du texte
+│   ├── utils/
+│   │   └── buffer.ts              # Gestion du flux de lettres
+│   └── model/
+│       └── letter_model.json      # Modèle TensorFlow.js
+├── package.json
+└── README.md
+
+```
